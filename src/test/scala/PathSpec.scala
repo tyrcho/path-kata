@@ -27,6 +27,6 @@ class PathSpec extends FlatSpec with Matchers {
 
   it should "find a path from several segments" in {
     val path = helper.findPath(Seq(train("a", "b"), train("a", "e"), train("c", "d"), train("b", "c")), "a", "d")
-    path shouldBe Some(Seq(train("a", "b"), train("c", "d"), train("b", "c")))
+    path shouldBe Some(Seq(train("a", "b"), train("b", "c"), train("c", "d")))
   }
 }
