@@ -29,4 +29,9 @@ class PathSpec extends FlatSpec with Matchers {
     val path = helper.findPath(Seq(train("a", "b"), train("a", "e"), train("c", "d"), train("b", "c")), "a", "d")
     path shouldBe Some(Seq(train("a", "b"), train("b", "c"), train("c", "d")))
   }
+
+  it should "find the shortest path" in {
+    val path = helper.findPath(Seq(train("a", "b"), train("a", "c"), train("c", "d"), train("b", "c")), "a", "d")
+    path shouldBe Some(Seq(train("a", "c"), train("c", "d")))
+  }
 }
