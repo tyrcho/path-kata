@@ -34,4 +34,9 @@ class PathSpec extends FlatSpec with Matchers {
     val path = helper.findPath(Seq(train("a", "b"), train("a", "c"), train("c", "d"), train("b", "c")), "a", "d")
     path shouldBe Some(Seq(train("a", "c"), train("c", "d")))
   }
+
+  it should "find a path with a stop constraint" in {
+    val path = helper.findPath(Seq(train("a", "b"), train("a", "c"), train("c", "d"), train("b", "c")), "a", "d", stops = Seq("b"))
+    path shouldBe Some(Seq(train("a", "b"), train("b", "c"), train("c", "d")))
+  }
 }

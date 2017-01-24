@@ -1,12 +1,12 @@
 
 class PathHelper {
   type Path = Seq[Segment]
-  
-  implicit class PathOps(path:Path) {
+
+  implicit class PathOps(path: Path) {
     def distance = path.map(_.distance).sum
   }
 
-  def findPath(segments: Path, from: String, to: String): Option[Path] = {
+  def findPath(segments: Path, from: String, to: String, stops: Seq[String] = Nil): Option[Path] = {
     if (from == to) Some(Seq())
     else (for {
       s <- segments
@@ -14,7 +14,9 @@ class PathHelper {
       path <- findPath(segments, s.end, to)
     } yield s +: path) match {
       case Nil => None
-      case l => Some(l.minBy(_.distance))
+      case l =>
+        val withStops = l.filter(path => stops.forall(stop => path.exists(seg => seg.start == stop)))
+        Some(withStops.minBy(_.distance))
     }
   }
 
