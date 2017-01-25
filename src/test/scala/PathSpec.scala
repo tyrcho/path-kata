@@ -8,7 +8,13 @@ import org.scalatest.prop.PropertyChecks
 @RunWith(classOf[JUnitRunner])
 class PathSpec extends FlatSpec with Matchers {
   val helper = new PathHelper
-  def train(start: String, end: String) = Segment(start, end, mode = "train", duration = 100, distance = 80, price = 10)
+  val points = Seq(Point("a", 0, 0), Point("b", 10, 10), Point("c", 20, 0), Point("d", 30, 0), Point("e", 40, 0))
+  // a---c--d--e
+  //  \ /
+  //   b
+
+  def point(name: String) = points.filter(_.name == name).head
+  def train(start: String, end: String) = Segment(point(start), point(end))
 
   "a path helper" should "find trivial path" in {
     val path = helper.findPath(Seq(train("a", "b")), "a", "b")

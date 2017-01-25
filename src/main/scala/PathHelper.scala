@@ -10,12 +10,12 @@ class PathHelper {
     if (from == to) Some(Seq())
     else (for {
       s <- segments
-      if s.start == from
-      path <- findPath(segments, s.end, to)
+      if s.start.name == from
+      path <- findPath(segments, s.end.name, to)
     } yield s +: path) match {
       case Nil => None
       case l =>
-        val withStops = l.filter(path => stops.forall(stop => path.exists(seg => seg.start == stop)))
+        val withStops = l.filter(path => stops.forall(stop => path.exists(seg => seg.start.name == stop)))
         Some(withStops.minBy(_.distance))
     }
   }

@@ -1,3 +1,8 @@
 
-
-case class Segment(start: String, end: String, mode: String, duration: Int, distance: Int, price: Int)
+case class Segment(start: Point, end: Point) {
+  def distance = {
+    val dx = start.x - end.x
+    val dy = start.y - end.y
+    math.sqrt(dx * dx + dy * dy).toInt
+  }
+}
