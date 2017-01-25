@@ -6,16 +6,16 @@ class PathHelper {
     def distance = path.map(_.distance).sum
   }
 
-  def findPath(segments: Path, from: String, to: String, stops: Seq[String] = Nil): Option[Path] = {
+  def findPath(segments: Path, from: Point, to: Point, stops: Seq[Point] = Nil): Option[Path] = {
     if (from == to) Some(Seq())
     else (for {
       s <- segments
-      if s.start.name == from
-      path <- findPath(segments, s.end.name, to)
+      if s.start== from
+      path <- findPath(segments, s.end, to)
     } yield s +: path) match {
       case Nil => None
       case l =>
-        val withStops = l.filter(path => stops.forall(stop => path.exists(seg => seg.start.name == stop)))
+        val withStops = l.filter(path => stops.forall(stop => path.exists(seg => seg.start == stop)))
         Some(withStops.minBy(_.distance))
     }
   }

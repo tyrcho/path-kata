@@ -6,3 +6,5 @@ case class Segment(start: Point, end: Point) {
     math.sqrt(dx * dx + dy * dy).toInt
   }
 }
+
+case class Point(name: String, x: Int, y: Int)
