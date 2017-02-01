@@ -8,78 +8,55 @@ import org.scalatest.prop.PropertyChecks
 @RunWith(classOf[JUnitRunner])
 class PathSpec extends FlatSpec with Matchers {
   val helper = new PathHelper
-  //  val pa = Point("a", 0, 0)
-  //  val pb = Point("b", 10, 10)
-  //  val pc = Point("c", 20, 0)
+  val pa = Point("a", 0, 0)
+  val pb = Point("b", 10, 10)
+  val pc = Point("c", 20, 0)
   val pd = Point("D", 30, 0)
-  //  val pe = Point("E", 40, 0)
-  val pa = Point("A", 0, 0)
-  val pb = Point("B", 10, 0)
-  val pc = Point("C", 5, 5)
+  val pe = Point("E", 40, 0)
+  val pz = Point("Z", 40, 40)
 
   // a---c--d--e
   //  \ /
   //   b
 
-  "a path helper" should "find trivial path" in {
-    //When
-    val path = helper.findPath(List(Segment(pa, pb)), pa, pb)
-    //Then
-    path shouldBe Some(List(Segment(pa, pb)))
-  }
+  val ab = Segment(pa, pb)
+  val ac = Segment(pa, pc)
+  val bc = Segment(pb, pc)
+  val cd = Segment(pc, pd)
+  val de = Segment(pd, pe)
 
-  it should "find no path if no segments are used" in {
-    //When
-    val path = helper.findPath(List(), pa, pb)
-    //Then
-    path shouldBe None
-  }
-
-  it should "find an empty path if origin = destination" in {
-    //When
-    val path = helper.findPath(List(Segment(pa, pb)), pa, pa)
-    //Then
-    path shouldBe Some(Nil)
-  }
-
-  it should "find a path in a simple case with only one possibility" in {
-    //When
-    val path = helper.findPath(List(Segment(pa, pb), Segment(pa, pc)), pa, pb)
-    //Then
-    path shouldBe Some(List(Segment(pa, pb)))
-  }
-
-  it should "list available destinations with the distance of one segment" in {
-    //Given
-    //When
-    val destinations = helper.findDestinations(List(Segment(pa, pb), Segment(pa, pc)), pa)
-    //Then
-    destinations shouldBe List(pb, pc)
-
-  }
-
-  it should "find the shortest path" in {
-    //When
-    val path = helper.findPath(List(Segment(pa, pc), Segment(pc, pb), Segment(pb, pd), Segment(pa, pb)), pa, pd)
-    //Then
-    path shouldBe Some(List(Segment(pa, pb), Segment(pb, pd)))
-  }
+  val acde = Path(List(ac, cd, de))
+  val abcde = Path(List(ab, bc, cd, de))
 
   "a segment" should "know its distance" in {
-    //Given
-    val segment = Segment(pa, pb)
     //When
-    val distance = segment.distance
+    val distance = ac.distance
     //Then
-    distance shouldBe 10.0 +- 0.0001
+    distance shouldBe 20.0 +- 0.0001
   }
 
   "a path" should "know its distance" in {
     //Given
-    val path = List(Segment(pa, pb), Segment(pb, pd))
+    val path = Path(List(ac, cd))
     //When
-    val distance = helper.getDistance(path)
+    val distance = path.distance
     //Then
     distance shouldBe 30.0 +- 0.0001
+  }
+
+  "a path helper" should "find nothing given no paths" in {
+    helper.shortestPath(Nil) shouldBe None
+  }
+
+  it should "find the shortest path" in {
+    helper.shortestPath(List(acde, abcde)) shouldBe Some(acde)
+  }
+
+  it should "find the shortest path with a forced stop" in {
+    helper.shortestPath(List(acde, abcde), List(pb)) shouldBe Some(abcde)
+  }
+
+  it should "not find a path with impossible stops" in {
+    helper.shortestPath(List(acde, abcde), List(pb, pz)) shouldBe None
   }
 }

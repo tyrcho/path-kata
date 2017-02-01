@@ -6,3 +6,7 @@ case class Segment(origin: Point, destination: Point) {
   val y = origin.y - destination.y
   def distance: Double = Math.sqrt(x * x + y * y)
 }
+
+case class Path(segments: List[Segment]) {
+  val distance = segments.map(_.distance).sum
+}

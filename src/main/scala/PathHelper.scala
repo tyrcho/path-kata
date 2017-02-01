@@ -1,30 +1,14 @@
 
 class PathHelper {
-  def findPath(list: List[Segment], pa: Point, pb: Point): Option[List[Segment]] = {
-    if (list.isEmpty) None
-    else if (pa == pb) Some(Nil)
+
+  def shortestPath(paths: List[Path], stops: List[Point] = Nil): Option[Path] =
+    if (paths.isEmpty) None
     else {
-      val destinations = findDestinations(list, pa)
-      val allPaths = for {
-        destination <- destinations
-        path <- findPath(list, destination, pb)
-      } yield Segment(pa, destination) :: path
-      allPaths match {
-        case Nil =>
-          None
-        case paths => Some(paths.minBy(getDistance))
-      }
+      val withStops = paths.filter(
+        path => stops.forall(
+          stop => path.segments.exists(s => s.origin == stop || s.destination == stop)))
+      if (withStops.nonEmpty)
+        Some(withStops.minBy(_.distance))
+      else None
     }
-  }
-
-  def findDestinations(list: List[Segment], pa: Point) = {
-    for {
-      segment <- list
-      if segment.origin == pa
-    } yield segment.destination
-  }
-
-  def getDistance(path: List[Segment]): Double = {
-    path.map(_.distance).sum
-  }
 }
