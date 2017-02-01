@@ -1,17 +1,8 @@
-case class Path(segments: Seq[Segment] = Seq()) {
-  def add(seg: Segment) = Path(seg +: segments)
+case class Point(name: String, x: Long, y: Long)
 
-  def distance = segments.map(_.distance).sum
-
-  def stops = segments.map(_.start).toSet ++ segments.map(_.end)
+case class Segment(origin: Point, destination: Point) {
+  override def toString = s"${origin.name} -${destination.name}"
+  val x = origin.x - destination.x
+  val y = origin.y - destination.y
+  def distance: Double = Math.sqrt(x * x + y * y)
 }
-
-case class Segment(start: Point, end: Point) {
-  def distance = {
-    val dx = start.x - end.x
-    val dy = start.y - end.y
-    math.sqrt(dx * dx + dy * dy).toInt
-  }
-}
-
-case class Point(name: String, x: Int, y: Int)
