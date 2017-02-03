@@ -8,11 +8,25 @@ and we want to select the best one based on duration and intermediate stops to p
 
 - Point(x,y)
 - Segment(origin, destination)
-- Path(segments)
+- Path(segments) *We consider that a path is collection of segments, rather than a collection of points*
 - PathList(paths)
 
 We want to find the shortest path in a PathList, then to find the shortest path which stops at specific points.
 
+## TDD Steps
+
+Suggestion of implementation steps, which should match with your tests :
+
+* Compute the distance of a segment
+* Compute the distance of a path
+* Find the shortest path in a list of paths
+
+* Enumerate all stops in a path
+* Filter paths keeping only those which include a stop
+* Filter paths keeping only those which include a given list of stops
+
+* Find the shortest path in a list of paths, which includes a given list of stops
+  
 ## Syntax examples
 
 ```scala
