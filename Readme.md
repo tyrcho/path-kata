@@ -17,15 +17,19 @@ We want to find the shortest path in a PathList, then to find the shortest path 
 
 Suggestion of implementation steps, which should match with your tests :
 
+### Goal : Find the shortest path in a list of paths
+
 * Compute the distance of a segment
 * Compute the distance of a path
 * Find the shortest path in a list of paths
+
+### Goal : Filter paths keeping only those which include a given list of stops
 
 * Enumerate all stops in a path
 * Filter paths keeping only those which include a stop
 * Filter paths keeping only those which include a given list of stops
 
-* Find the shortest path in a list of paths, which includes a given list of stops
+### Goal : Find the shortest path in a list of paths, which includes a given list of stops
   
 ## Syntax examples
 
