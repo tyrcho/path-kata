@@ -6,7 +6,7 @@
 
     <groupId>info.daviot</groupId>
     <version>0.1-SNAPSHOT</version>
-    <artifactId>path-kata-java8</artifactId>
+    <artifactId>path-kata-java8-quickstart</artifactId>
 
     <packaging>jar</packaging>
 
