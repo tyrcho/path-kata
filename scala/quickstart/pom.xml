@@ -6,7 +6,7 @@
 
 	<groupId>info.daviot</groupId>
 	<version>0.1-SNAPSHOT</version>
-	<artifactId>path-kata-scala</artifactId>
+	<artifactId>path-kata-scala-quickstart</artifactId>
 
 	<packaging>jar</packaging>
 
