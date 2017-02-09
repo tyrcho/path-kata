@@ -65,4 +65,4 @@ This step is more tricky because it involves recursion so it is usually only rea
 
 ## Syntax examples
 
-see [java8/syntax.md](java8/syntax.md) or [scala/syntax.md](scala/syntax.md) for examples in Java 8 or in Scala.
+see [Demo.java](java8/quickstart/src/main/java/Demo.java) or [Demo.sc](scala/quickstart/src/main/scala/Demo.sc) for examples in Java 8 or in Scala.
