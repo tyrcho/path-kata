@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Functional Programming Kata - Introduction</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+
+
+<body>
+
+  <textarea id="source">
+
+# Functional Programming Kata : Paths
+
+The objective of this Kata is to be a gentle introduction to Functional Programming in 1h30 - 2h. 
+
+We'll take 15 min to introduce the context, setup the groups and prepare the IDEs
+ 
+We keep 15 min a the end to share the code and retrospect.
+
+---
+
+# Functional Programming
+
+In FP, we split our code between pure functional code and code with side effects (IO, modifying variables ...).
+
+This Kata can be done with pure functional style (no modification of variables => all can be declared final).
+
+FP means that we make heavy use of functions : they can be passed as arguments to other functions. See the syntax examples for suggestions.
+
+Note : FP also means that a function can return a function but this is not needed here.
+
+---
+
+# TDD 
+
+## 3 rules
+
+1. You are not allowed to write any production code unless it is to make a failing unit test pass.
+2. You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
+3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+
+Source : [Uncle Bob](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd)
+
+---
+## Suggestion for the process
+
+Always start by testing the limit condition(s) : empty list, value of zero ... This allows you to focus on the usage of the method and its signature.
+
+Then add a more relevant test to check the implementation.
+
+---
+
+# Context : search paths produced by an API
+
+Imagine that some Google Maps like API provides **possible paths from origin to destination**.
+
+Select the best one based on distance and intermediate stops.
+
+Expect the API to produce **only valid paths**.
+
+![Alt text](https://g.gravizo.com/g?
+/** @opt all */
+class Point {
+  public int x;
+  public int y;
+}
+/** @opt all */
+class Segment {
+  public Point origin;
+  public Point destination;
+  public double distance%28%29;
+}
+/** @opt all */
+class Path {
+  public List segments;
+  public double distance%28%29;
+  public List stops;
+}
+/** @opt all */
+class PathList {
+  public List paths;
+  public Path shortestPath%28%29;
+}
+)
+
+*We consider that a path is collection of segments, rather than a collection of points*
+
+---
+# TDD Steps
+
+Suggestion of implementation steps, which should match with your tests.
+
+7 (+1) steps
+
+---
+
+# Steps 1-3 : Find the shortest path 
+
+Find the shortest path in a list of paths :
+
+* Compute the distance of a segment
+* Compute the distance of a path
+* Find the shortest path in a list of paths
+
+---
+
+# Steps 4-6 : Filter paths 
+
+Filter paths keeping only those which include a given list of stops :
+
+* Enumerate all stops in a path
+* Filter paths keeping only those which include a stop
+* Filter paths keeping only those which include a given list of stops
+
+---
+
+# Step 7 : Find the best path
+
+Find the shortest path in a list of paths, which includes a given list of stops
+  
+---
+# Bonus Step 
+
+Compute all possible paths between 2 points, given a list of Segments.
+
+This step is more tricky because it involves recursion so it is usually only reachable for the fastest groups who already have experience with Functional Programming.
+
+---
+
+# Syntax examples
+
+see [Demo.java](../java8/quickstart/src/main/java/Demo.java) or [Demo.sc](../scala/quickstart/src/main/scala/Demo.sc) for examples in Java 8 or in Scala.
+
+
+  </textarea>
+    <script src="remark-latest.min.js"></script>
+    <script>var hljs = remark.highlighter.engine;</script>
+    <script src="remark.language.js"></script>
+    <script>
+        remark.macros.scale = function (percentage) {
+          var url = this;
+          return '<img src="' + url + '" style="width: ' + percentage + '" />';
+        };
+
+        var slideshow = remark.create({
+          highlightStyle: 'github',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+        // Alternatives for highlightLanguage : arta, ascetic, dark, default, far, github, googlecode, idea, ir_black, magula, monokai, rainbow, solarized-dark, solarized-light, sunburst, tomorrow, tomorrow-night-blue, tomorrow-night-bright, tomorrow-night, tomorrow-night-eighties, vs, zenburn. 
+
+    </script>
+    <script>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44561333-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script');
+          ga.src = 'https://ssl.google-analytics.com/ga.js';
+          var s = document.scripts[0];
+          s.parentNode.insertBefore(ga, s);
+        }());
+    </script>
+</body>
+</html>
