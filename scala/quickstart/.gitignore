@@ -1,12 +1,3 @@
-*.class
-*.log
-
-.classpath
-.project
-.settings/
-
-*~
-
 # sbt specific
 .history/
 .lib/
@@ -22,3 +13,10 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
+
+*.class
+*.log
+
+
+.idea/
+*.iml

@@ -1,13 +1,6 @@
-*.class
-*.log
+.idea/
+*.iml
 
 .classpath
 .project
 .settings/
-
-*~
-
-target/
-
-.idea/
-*.iml
